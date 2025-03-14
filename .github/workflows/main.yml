@@ -1,9 +1,9 @@
-name: Pull Request Workflow
+name: Auto Pull Request
 
 on:
   push:
     branches:
-      - feature/add-file
+      - 'feature/*'  # This ensures it triggers only when a push happens on feature/* branches.
 
 jobs:
   create-pr:
@@ -17,7 +17,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Auto PR for feature/add-file"
-          body: "This is an automatically created PR for feature/add-file"
-          base: main
-          head: feature/add-file
+          base: main  # The target branch (where you want to merge the PR to)
+          head: feature/add-file  # The branch with the changes
+          title: 'Auto PR: Add file.txt'
+          body: 'This is an auto-created PR for adding file.txt'
