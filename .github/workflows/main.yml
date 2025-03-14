@@ -1,0 +1,23 @@
+name: Pull Request Workflow
+
+on:
+  push:
+    branches:
+      - feature/add-file
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Auto PR for feature/add-file"
+          body: "This is an automatically created PR for feature/add-file"
+          base: main
+          head: feature/add-file
